@@ -270,7 +270,7 @@ Some of the tools may be specifically designed for red teaming, while others are
 </details>
 
 <details open>
-    <summary><b>Exfiltration</b> 5 tools</summary>
+    <summary><b>Exfiltration</b> 6 tools</summary>
     <ul>
         <ul>
 	        <li><b><a href="#dnscat2">Dnscat2</a></b><i> C2 via DNS tunneling</i></li>
@@ -278,6 +278,7 @@ Some of the tools may be specifically designed for red teaming, while others are
             <li><b><a href="#pyexfil">PyExfil</a></b><i> Data exfiltration PoC</i></li>
             <li><b><a href="#powershell-rat">Powershell RAT</a></b><i> Python based backdoor</i></li>
             <li><b><a href="#gd-thief">GD-Thief</a></b><i> Google drive exfiltration</i></li>
+            <li><b><a href="#goshs">goshs</a></b><i> Single-binary multi-protocol server for file transfer and exfiltration </i>
         </ul>
     </ul>
 </details>
@@ -4640,6 +4641,38 @@ optional arguments:
 ```
 
 Nice [blog post](https://antman1p-30185.medium.com/youre-a-gd-thief-1e02358fd557) explaining the logic behind the tool.
+
+### [🔙](#tool-list)[goshs](https://github.com/patrickhener/goshs)
+
+goshs is a single-binary file server for red teamers, replacing `python3 -m http.server` 
+with HTTP/S, WebDAV, SFTP, SMB, NTLM hash capture, DNS/SMTP OOB callbacks, 
+authentication, and share links — all from one command.
+
+**Install:**
+
+```bash
+go install goshs.de/goshs/v2@latest
+```
+
+**Usage:**
+
+```bash
+# Serve current directory
+goshs
+
+# Serve with HTTPS (self-signed) and basic auth
+goshs -s -ss -b user:password
+
+# Capture SMB NTLM hashes from connecting Windows clients
+goshs -smb -smb-domain CORP
+
+# DNS + SMTP OOB callbacks
+goshs -dns -dns-ip 10.10.10.10 -smtp -smtp-domain redteam.local
+```
+
+[![goshs](https://github.com/patrickhener/image-cdn/blob/main/goshs-smb-ntlm.png?raw=true)](https://github.com/patrickhener/image-cdn/blob/main/goshs-smb-ntlm.png?raw=true)
+
+*Image used from https://github.com/patrickhener/goshs*
 
 Impact
 ====================
